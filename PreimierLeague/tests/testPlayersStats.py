@@ -16,7 +16,7 @@ class testPlayersStats():
     cookies_And_Adds.accept_all_cookies()
     cookies_And_Adds.close_ad()
     player_stats.player_page()
-    player_stats.search__harry_kane()
+    player_stats.search_player_name()
     player_stats.click_player()
     sleep(3)
     player_stats.click_stats()

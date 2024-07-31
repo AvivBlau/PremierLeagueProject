@@ -14,7 +14,7 @@ class get_player_stats(unittest.TestCase):
         player_page = self.driver.find_element(By.PARTIAL_LINK_TEXT, "Players")
         player_page.click()
 
-    def search__harry_kane(self):
+    def search_player_name(self):
         search_harry_kane = self.driver.find_element(By.CSS_SELECTOR, "input[id='search-input']")
         search_harry_kane.click()
         search_harry_kane.clear()
