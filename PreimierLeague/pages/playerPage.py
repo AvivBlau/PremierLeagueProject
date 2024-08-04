@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
@@ -28,10 +30,12 @@ class playerPage():
     def click_player_and_stats(self):
         click_player_stats = self.driver.find_element(By.CLASS_NAME, self.click_player_locator)
         click_player_stats.click()
+        sleep(3)
         click_player_stats = self.driver.find_element(By.CSS_SELECTOR, self.click_stats_locator)
         click_player_stats.click()
 
     def get_player_stats(self, player):
+        sleep(5)
         goals = self.driver.find_element(By.CSS_SELECTOR, self.goals_locator).text
         assists = self.driver.find_element(By.CSS_SELECTOR, self.assists_locator).text
         appearances = self.driver.find_element(By.CSS_SELECTOR, self.appearances_locator).text
