@@ -15,4 +15,3 @@ class cookiesAndAdds():
             ad_button.click()
         except:
             print("No ad to close.")
-

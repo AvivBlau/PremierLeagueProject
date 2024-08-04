@@ -1,10 +1,5 @@
-import unittest
-from time import sleep
-
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from PreimierLeague.tests.seleniumBaseFile import seleniumBaseFile
-from PreimierLeague.tests.globals import url_base, player1
 
 
 class playerPage():
@@ -18,7 +13,6 @@ class playerPage():
         self.goals_locator = "span[data-stat='goals']"
         self.assists_locator = "span[data-stat='goal_assist']"
         self.appearances_locator = "span[data-stat='appearances']"
-
 
     def players_page(self):
         players_page = self.driver.find_element(By.PARTIAL_LINK_TEXT, self.player_page_locator)
@@ -34,11 +28,8 @@ class playerPage():
     def click_player_and_stats(self):
         click_player_stats = self.driver.find_element(By.CLASS_NAME, self.click_player_locator)
         click_player_stats.click()
-        sleep(4)
         click_player_stats = self.driver.find_element(By.CSS_SELECTOR, self.click_stats_locator)
         click_player_stats.click()
-        sleep(6)
-
 
     def get_player_stats(self, player):
         goals = self.driver.find_element(By.CSS_SELECTOR, self.goals_locator).text
@@ -47,15 +38,12 @@ class playerPage():
         print(f"The number of {player} goals is : {goals} ")
         print(f"The number of {player} assists is : {assists} ")
         print(f"The number of {player} appearances is : {appearances} ")
-        goals_as_int=int(goals)
+        goals_as_int = int(goals)
         assists_as_int = int(assists)
         appearances_as_int = int(appearances)
         assert goals_as_int > 200, "Something went wrong the number of goals decreased"
         assert assists_as_int > 45, "Something went wrong the number of assists decreased"
         assert appearances_as_int > 300, "Something went wrong the number of appearances decreased"
-        goal_contributions = (goals_as_int+assists_as_int)/appearances_as_int
+        goal_contributions = (goals_as_int + assists_as_int) / appearances_as_int
         print(f"The number of {player} goalcontributions is per game : {goal_contributions} ")
         return goal_contributions
-
-
-

@@ -1,5 +1,4 @@
 import unittest
-from time import sleep
 
 from PreimierLeague.pages.cookiesAndAdds import cookiesAndAdds
 from PreimierLeague.pages.playerPage import playerPage
@@ -29,9 +28,5 @@ class test_Analyze_Player_Details(unittest.TestCase):
         player_stats.click_player_and_stats()
         player_stats.get_player_stats(player2)
 
-
-
     def tearDown(self):
         self.base.selenium__end(self.driver)
-
-

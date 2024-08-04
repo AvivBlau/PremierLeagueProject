@@ -8,8 +8,7 @@ class seleniumBaseFile():
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         driver.get(url)
         driver.maximize_window()
-        driver.implicitly_wait(15)
-        sleep(3)
+        driver.implicitly_wait(10)
         return driver
 
     def selenium__end(self, driver):
