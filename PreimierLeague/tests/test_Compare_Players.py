@@ -6,7 +6,7 @@ from PreimierLeague.tests.globals import url_base, player1, player2
 from PreimierLeague.tests.seleniumBaseFile import seleniumBaseFile
 
 
-class test_Compare_Players(unittest.TestCase):S
+class test_Compare_Players(unittest.TestCase):
 
     def setUp(self):
         base = seleniumBaseFile()
