@@ -19,7 +19,7 @@ class playerPage():
         self.assists_locator = "span[data-stat='goal_assist']"
         self.appearances_locator = "span[data-stat='appearances']"
         self.search_button_locator = "searchIconContainer.searchCommit"
-        self.wait_for_player_locator = "img.player__name-image"
+        self.wait_for_player_elements_locator = "img.player__name-image"
 
     def players_page(self):
         players_page = self.driver.find_element(By.PARTIAL_LINK_TEXT, self.player_page_locator)
@@ -30,21 +30,14 @@ class playerPage():
         search_player.click()
         search_player.clear()
         search_player.send_keys(player_name)
-        wait_for_player = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR,  self.wait_for_player_locator)))
-        player_elements = self.driver.find_elements(By.CSS_SELECTOR,  self.wait_for_player_locator)
-        for player_element in player_elements:
-            try:
-                if player_element.get_attribute("data-error") == "true":
-                    print("Skipping player with data-error='true'")
-                    continue
-                else:
-                    print(f"Player {player_name} found without errors, proceeding.")
-                    search_player.send_keys(Keys.ENTER)
-                    break
-            except NoSuchElementException:
-                print(f"Error processing player: {player_element.get_attribute('alt')}")
-                continue
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR,  self.wait_for_player_elements_locator)))
+        for wait_for_player_element in self.driver.find_elements(By.CSS_SELECTOR, self.wait_for_player_elements_locator):
+            if wait_for_player_element.get_attribute("data-error") != "true":
+                search_player.send_keys(Keys.ENTER)
+                break
+        else:
+            print("No valid players found.")
         sleep(2)
         search_player.send_keys(Keys.ENTER)
 
