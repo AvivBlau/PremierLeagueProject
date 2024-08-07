@@ -1,7 +1,10 @@
 from time import sleep
 
+from selenium.common import NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class playerPage():
@@ -15,6 +18,8 @@ class playerPage():
         self.goals_locator = "span[data-stat='goals']"
         self.assists_locator = "span[data-stat='goal_assist']"
         self.appearances_locator = "span[data-stat='appearances']"
+        self.search_button_locator = "searchIconContainer.searchCommit"
+        self.wait_for_player_locator = "img.player__name-image"
 
     def players_page(self):
         players_page = self.driver.find_element(By.PARTIAL_LINK_TEXT, self.player_page_locator)
@@ -25,17 +30,34 @@ class playerPage():
         search_player.click()
         search_player.clear()
         search_player.send_keys(player_name)
+        wait_for_player = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR,  self.wait_for_player_locator)))
+        player_elements = self.driver.find_elements(By.CSS_SELECTOR,  self.wait_for_player_locator)
+        for player_element in player_elements:
+            try:
+                if player_element.get_attribute("data-error") == "true":
+                    print("Skipping player with data-error='true'")
+                    continue
+                else:
+                    print(f"Player {player_name} found without errors, proceeding.")
+                    search_player.send_keys(Keys.ENTER)
+                    break
+            except NoSuchElementException:
+                print(f"Error processing player: {player_element.get_attribute('alt')}")
+                continue
+        sleep(2)
         search_player.send_keys(Keys.ENTER)
 
     def click_player_and_stats(self):
-        click_player_stats = self.driver.find_element(By.CLASS_NAME, self.click_player_locator)
+        sleep(1)
+        click_player_stats = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, self.click_player_locator)))
+        sleep(1)
         click_player_stats.click()
-        sleep(5)
         click_player_stats = self.driver.find_element(By.CSS_SELECTOR, self.click_stats_locator)
         click_player_stats.click()
 
     def get_player_stats(self, player):
-        sleep(6)
         goals = self.driver.find_element(By.CSS_SELECTOR, self.goals_locator).text
         assists = self.driver.find_element(By.CSS_SELECTOR, self.assists_locator).text
         appearances = self.driver.find_element(By.CSS_SELECTOR, self.appearances_locator).text

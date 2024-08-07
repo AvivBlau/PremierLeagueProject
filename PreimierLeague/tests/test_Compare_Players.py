@@ -28,7 +28,7 @@ class test_Compare_Players(unittest.TestCase):
         player_stats.click_player_and_stats()
         player_two = player_stats.get_player_stats(player2)
 
-        assert player_one > player_two, f"Something went wrong{player1} has more goal contributions then {player2}"
+        assert player_one > player_two, f"{player2} has more goal contributions per game then {player1} "
 
     def tearDown(self):
         self.base.selenium__end(self.driver)
