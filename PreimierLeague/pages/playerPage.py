@@ -30,12 +30,13 @@ class playerPage():
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR,  self.wait_for_player_elements_locator)))
         wait_for_valid_players = self.driver.find_elements(By.CSS_SELECTOR, self.wait_for_player_elements_locator)
+        # Look for the first player where data-error is not equal to "true"
         for wait_for_valid_player in wait_for_valid_players:
             if wait_for_valid_player.get_attribute("data-error") != "true":
                 search_player.send_keys(Keys.ENTER)
                 return
 
-    def click_player_and_stats(self):
+    def click_player_stats(self):
         sleep(2)
         click_player_stats = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, self.click_player_locator)))

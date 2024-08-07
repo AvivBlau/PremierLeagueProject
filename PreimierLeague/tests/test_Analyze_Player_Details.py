@@ -21,11 +21,11 @@ class test_Analyze_Player_Details(unittest.TestCase):
         cookies_And_Adds.close_ad()
         player_stats.players_page()
         player_stats.search_player_name(player1)
-        player_stats.click_player_and_stats()
+        player_stats.click_player_stats()
         player_stats.get_player_stats(player1)
         player_stats.players_page()
         player_stats.search_player_name(player2)
-        player_stats.click_player_and_stats()
+        player_stats.click_player_stats()
         player_stats.get_player_stats(player2)
 
     def tearDown(self):

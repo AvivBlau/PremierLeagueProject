@@ -21,11 +21,11 @@ class test_Compare_Players(unittest.TestCase):
         cookies_And_Adds.close_ad()
         player_stats.players_page()
         player_stats.search_player_name(player1)
-        player_stats.click_player_and_stats()
+        player_stats.click_player_stats()
         player_one = player_stats.get_player_stats(player1)
         player_stats.players_page()
         player_stats.search_player_name(player2)
-        player_stats.click_player_and_stats()
+        player_stats.click_player_stats()
         player_two = player_stats.get_player_stats(player2)
 
         assert player_one > player_two, f"{player2} has more goal contributions per game then {player1} "
