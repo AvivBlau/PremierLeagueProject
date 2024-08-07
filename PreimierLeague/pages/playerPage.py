@@ -36,7 +36,7 @@ class playerPage():
                 return
 
     def click_player_and_stats(self):
-        sleep(1)
+        sleep(2)
         click_player_stats = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, self.click_player_locator)))
         click_player_stats.click()
