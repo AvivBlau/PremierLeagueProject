@@ -29,9 +29,9 @@ class playerPage():
         search_player.send_keys(player_name)
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR,  self.wait_for_player_elements_locator)))
-        wait_for_player_elements = self.driver.find_elements(By.CSS_SELECTOR, self.wait_for_player_elements_locator)
-        for wait_for_player_element in wait_for_player_elements:
-            if wait_for_player_element.get_attribute("data-error") != "true":
+        wait_for_valid_players = self.driver.find_elements(By.CSS_SELECTOR, self.wait_for_player_elements_locator)
+        for wait_for_valid_player in wait_for_valid_players:
+            if wait_for_valid_player.get_attribute("data-error") != "true":
                 search_player.send_keys(Keys.ENTER)
                 return
 
@@ -57,5 +57,5 @@ class playerPage():
         assert assists_as_int > 45, "Something went wrong the number of assists decreased"
         assert appearances_as_int > 300, "Something went wrong the number of appearances decreased"
         goal_contributions = (goals_as_int + assists_as_int) / appearances_as_int
-        print(f"The number of {player} goalcontributions is per game : {goal_contributions} ")
+        print(f"The number of {player} goal contributions is per game : {goal_contributions} ")
         return goal_contributions
