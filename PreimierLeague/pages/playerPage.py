@@ -32,7 +32,8 @@ class playerPage():
         search_player.send_keys(player_name)
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR,  self.wait_for_player_elements_locator)))
-        for wait_for_player_element in self.driver.find_elements(By.CSS_SELECTOR, self.wait_for_player_elements_locator):
+        wait_for_player_elements = self.driver.find_elements(By.CSS_SELECTOR, self.wait_for_player_elements_locator)
+        for wait_for_player_element in wait_for_player_elements:
             if wait_for_player_element.get_attribute("data-error") != "true":
                 search_player.send_keys(Keys.ENTER)
                 break
