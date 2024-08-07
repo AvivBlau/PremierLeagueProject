@@ -1,11 +1,8 @@
 from time import sleep
-
-from selenium.common import NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 
 class playerPage():
 
@@ -36,17 +33,12 @@ class playerPage():
         for wait_for_player_element in wait_for_player_elements:
             if wait_for_player_element.get_attribute("data-error") != "true":
                 search_player.send_keys(Keys.ENTER)
-                break
-        else:
-            print("No valid players found.")
-        sleep(2)
-        search_player.send_keys(Keys.ENTER)
+                return
 
     def click_player_and_stats(self):
         sleep(1)
         click_player_stats = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, self.click_player_locator)))
-        sleep(1)
         click_player_stats.click()
         click_player_stats = self.driver.find_element(By.CSS_SELECTOR, self.click_stats_locator)
         click_player_stats.click()
