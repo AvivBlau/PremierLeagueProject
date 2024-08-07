@@ -1,5 +1,4 @@
 import unittest
-
 from PreimierLeague.pages.cookiesAndAdds import cookiesAndAdds
 from PreimierLeague.pages.playerPage import playerPage
 from PreimierLeague.tests.globals import url_base, player1, player2
