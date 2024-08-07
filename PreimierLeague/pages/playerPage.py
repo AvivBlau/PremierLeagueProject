@@ -35,6 +35,7 @@ class playerPage():
             if wait_for_valid_player.get_attribute("data-error") != "true":
                 search_player.send_keys(Keys.ENTER)
                 return
+            S
 
     def click_player_stats(self):
         sleep(2)
